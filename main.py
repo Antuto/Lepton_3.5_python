@@ -3,8 +3,6 @@ import cv2
 from pylepton.Lepton3 import Lepton3
 from picamera2 import Picamera2
 
-import math
-
 kernel = np.array([[0, -1, 0],
                    [-1, 5,-1],
                    [0, -1, 0]])
