@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 from pylepton.Lepton3 import Lepton3
-from picamera2 import Picamera2
+#from picamera2 import Picamera2
 
 kernel = np.array([[0, -1, 0],
                    [-1, 5,-1],
@@ -9,12 +9,12 @@ kernel = np.array([[0, -1, 0],
 
 cv2.startWindowThread()
 
-# Configure camera and start
+"""# Configure camera and start
 picam2 = Picamera2()
 config = picam2.create_preview_configuration(raw={"size": (2592, 1944)}) #Max resolution : (3280, 2464)
 picam2.configure(config)
 picam2.start()
-
+"""
 def zoom_center(val,img):
 
     y_size = img.shape[0]
@@ -51,8 +51,11 @@ while True:
     final = np.uint8(image_sharp)
     #final = cv2.equalizeHist(final) #-> NEED TO TEST instead of normalize 
     rgb_img = cv2.applyColorMap(final, cv2.COLORMAP_PLASMA)
-    
-    
+
+    final_render = cv2.imshow('composite', rgb_img)
+    if cv2.waitKey(1) == ord('q'):
+        break
+"""
     #----------------- STANDARD Camera-----------------------------
     #Capture raw input in an array
     normal = picam2.capture_array()
@@ -64,12 +67,12 @@ while True:
     resized_up1 = cv2.resize(zoomed, up_points1, interpolation=cv2.INTER_LANCZOS4)
     #convert raw BGR to RGB format
     rgb = cv2.cvtColor(resized_up1, cv2.COLOR_BGR2RGB)
-    
+
     
     #----------Apply post process----------#
         # converting to gray scale
     gray = cv2.cvtColor(rgb, cv2.COLOR_BGR2GRAY)
-        
+
         # remove noise
     kernel_size = 1
     scale = 1
@@ -94,10 +97,8 @@ while True:
 
     #-----------------------------------
     #final_composite = cv2.addWeighted(rgb_img, 1, shifted, 1, 0.0)
-    
-    final_render = cv2.imshow('composite', rgb_img)
-    if cv2.waitKey(1) == ord('q'):
-        break
+    """
+
 #cv2.VideoCapture(np.uint8(a))  # write it!
 
 
