@@ -11,7 +11,7 @@ cv2.startWindowThread()
 """
 # Configure camera and start
 picam2 = Picamera2()
-config = picam2.preview_configuration(raw={"size": (2592, 1944)}) #Max resolution : (3280, 2464)
+config = picam2.create_preview_configuration(raw={"size": (2592, 1944)}) #Max resolution : (3280, 2464)
 picam2.configure(config)
 picam2.start()
 """
