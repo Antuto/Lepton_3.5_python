@@ -48,9 +48,9 @@ while True:
 
     
     # Upscale the image using new  width and height
-    resize = 4
-    up_width = 160 * 3
-    up_height = 120 * 5
+    resize = 5
+    up_width = 160 * resize
+    up_height = 120 * resize
     up_points = (up_width, up_height)
     resized_up = cv2.resize(a, up_points, interpolation=cv2.INTER_LANCZOS4)
     #Remove noise with blur then Sharpen it
