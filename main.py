@@ -10,7 +10,7 @@ kernel = np.array([[0, -1, 0],
 cv2.startWindowThread()
 
 dim_x = 800
-dim_y = 408
+dim_y = 400
 center = (int(dim_x/2),int(dim_y/2))
 
 """# Configure camera and start
@@ -49,8 +49,8 @@ while True:
     
     # Upscale the image using new  width and height
     resize = 4
-    up_width = 160 * 5
-    up_height = 120 * 3
+    up_width = 160 * 3
+    up_height = 120 * 5
     up_points = (up_width, up_height)
     resized_up = cv2.resize(a, up_points, interpolation=cv2.INTER_LANCZOS4)
     #Remove noise with blur then Sharpen it
