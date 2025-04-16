@@ -68,7 +68,7 @@ while True:
     #final = cv2.equalizeHist(final) #-> NEED TO TEST instead of normalize 
     rgb_img = cv2.applyColorMap(final, cv2.COLORMAP_PLASMA)
 
-    cv2.putText(rgb_img, text, (w // 2 - 50, h // 2), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
+    cv2.putText(rgb_img, text, center, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
 
     final_render = cv2.imshow(winname, rgb_img)
     if cv2.waitKey(1) == ord('q'):
