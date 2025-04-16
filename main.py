@@ -10,7 +10,7 @@ kernel = np.array([[0, -1, 0],
 cv2.startWindowThread()
 
 dim_x = 800
-dim_y = 400
+dim_y = 480
 center = (int(dim_x/2),int(dim_y/2))
 sensor_center = (80,60)
 
@@ -58,10 +58,10 @@ while True:
     line_size = 10
 
     # Upscale the image using new  width and height
-    resize = 3.33333333
+    resize = 4
     up_width = 160 * resize
     up_height = 120 * resize
-    up_points = (int(up_width), int(up_height))
+    up_points = (up_width, up_height)
     resized_up = cv2.resize(frame, up_points, interpolation=cv2.INTER_LANCZOS4)
     #Remove noise with blur then Sharpen it
     smoothed = cv2.GaussianBlur(resized_up, (3, 3), 10)
