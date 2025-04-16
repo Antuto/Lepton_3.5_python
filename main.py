@@ -12,6 +12,7 @@ cv2.startWindowThread()
 dim_x = 800
 dim_y = 480
 center = (int(dim_x/2),int(dim_y/2))
+text_center = (int(dim_x/2)+20,int(dim_y/2)+20)
 sensor_center = (80,60)
 
 """# Configure camera and start
@@ -77,7 +78,7 @@ while True:
     cv2.line(rgb_img, (center[0], center[1] - line_size), (center[0], center[1] + line_size), (255, 255, 255), 1)
     cv2.line(rgb_img, (center[0] - line_size, center[1]), (center[0] + line_size, center[1]), (255, 255, 255), 1)
     cv2.circle(rgb_img, center, 5, (255, 255, 255), 1)
-    cv2.putText(rgb_img, text, center*1.5, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
+    cv2.putText(rgb_img, text, text_center, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
 
     final_render = cv2.imshow(winname, rgb_img)
     if cv2.waitKey(1) == ord('q'):
