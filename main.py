@@ -47,8 +47,11 @@ while True:
     
     with Lepton3() as l:
         frame, _ = l.capture()
+        #h, w = frame.shape
+        center_temp = frame[sensor_center]
+        text = f"Temp: {ktoc(center_temp)}"
 
-    frame = cv2.normalize(frame, frame, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
+    frame = cv2.normalize(frame, frame, 0, 65535, cv2.NORM_MINMAX)  # extend contrast
     frame = np.right_shift(frame, 8, frame)  # fit data into 8 bits
 
     # Récupération du pixel central
@@ -67,6 +70,8 @@ while True:
     final = np.uint8(image_sharp)
     #final = cv2.equalizeHist(final) #-> NEED TO TEST instead of normalize 
     rgb_img = cv2.applyColorMap(final, cv2.COLORMAP_PLASMA)
+
+    cv2.putText(rgb_img, text, center, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
 
     final_render = cv2.imshow(winname, rgb_img)
     if cv2.waitKey(1) == ord('q'):
