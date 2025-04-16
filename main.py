@@ -37,7 +37,7 @@ def zoom_center(val,img):
 
 winname = "flir_windows"
 cv2.namedWindow(winname, cv2.WINDOW_NORMAL)
-cv2.moveWindow(winname, dim_x - 1, dim_y - 1)
+cv2.moveWindow(winname, 0, 0)
 cv2.setWindowProperty(winname, cv2.WND_PROP_FULLSCREEN,
                           cv2.WINDOW_FULLSCREEN)
 def ktoc(val):
