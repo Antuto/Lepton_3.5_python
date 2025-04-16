@@ -45,7 +45,7 @@ while True:
     
     with Lepton3() as l:
         frame, _ = l.capture()
-        h, w = frame.shape
+        h, w, _ = frame.shape
         center_temp = frame[h//2, w//2]
         text = f"Temp: {ktoc(center_temp)}"
 
