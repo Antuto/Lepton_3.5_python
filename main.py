@@ -51,11 +51,11 @@ while True:
         center_temp = frame[sensor_center]
         text = f"Temp: {ktoc(center_temp)}"
 
-    frame = cv2.normalize(frame, frame, 0, 65535, cv2.NORM_MINMAX)  # extend contrast
+    frame = cv2.normalize(frame, frame, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
     frame = np.right_shift(frame, 8, frame)  # fit data into 8 bits
 
     # Récupération du pixel central
-
+    line_size = 10
 
     # Upscale the image using new  width and height
     resize = 5
@@ -70,7 +70,10 @@ while True:
     final = np.uint8(image_sharp)
     #final = cv2.equalizeHist(final) #-> NEED TO TEST instead of normalize 
     rgb_img = cv2.applyColorMap(final, cv2.COLORMAP_PLASMA)
-
+    # Draw a diagonal blue line with thickness of 5 px
+    cv2.line(rgb_img, (center[0], center[1] - line_size), (center[0], center[1] + line_size), (255, 255, 255), 1)
+    cv2.line(rgb_img, (center[0] - line_size, center[1]), (center[0] + line_size, center[1]), (255, 255, 255), 1)
+    cv2.circle(rgb_img, center, 5, (255, 255, 255), 1)
     cv2.putText(rgb_img, text, center, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
 
     final_render = cv2.imshow(winname, rgb_img)
