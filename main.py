@@ -45,9 +45,11 @@ while True:
     
     with Lepton3() as l:
         frame, _ = l.capture()
-        h, w, _ = frame.shape
-        center_temp = frame[h//2, w//2]
-        text = f"Temp: {ktoc(center_temp)}"
+        """h, w, _ = frame.shape
+        center_temp = frame[h//2, w//2]"""
+        max_temp = np.max(frame)
+        hot_y, hot_x = np.unravel_index(np.argmax(frame), frame.shape)
+        text = f"Temp: {ktoc(max_temp)}"
 
     frame = cv2.normalize(frame, frame, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
     frame = np.right_shift(frame, 8, frame)  # fit data into 8 bits
