@@ -12,6 +12,7 @@ cv2.startWindowThread()
 dim_x = 800
 dim_y = 400
 center = (int(dim_x/2),int(dim_y/2))
+sensor_center = (80,60)
 
 """# Configure camera and start
 picam2 = Picamera2()
@@ -44,7 +45,7 @@ while True:
     with Lepton3() as l:
         frame, _ = l.capture()
         #h, w = frame.shape
-        center_temp = frame[center]
+        center_temp = frame[sensor_center]
         text = f"Temp: {center_temp}"
 
     frame = cv2.normalize(frame, frame, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
