@@ -44,7 +44,7 @@ while True:
     with Lepton3() as l:
         frame, _ = l.capture()
         #h, w = frame.shape
-        center_temp = frame[h // 2, w // 2]
+        center_temp = frame[center]
         text = f"Temp: {center_temp}"
 
     frame = cv2.normalize(frame, frame, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
