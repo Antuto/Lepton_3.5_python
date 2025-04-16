@@ -59,6 +59,7 @@ while True:
     cv2.moveWindow(winname, 0, 0)
     cv2.setWindowProperty(winname, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
+    cv2.rotate(frame, cv2.ROTATE_180)
     # Upscale the image using new  width and height
     resize = 4
     up_width = 160 * 5
