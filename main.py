@@ -61,7 +61,7 @@ while True:
     #final = cv2.equalizeHist(final) #-> NEED TO TEST instead of normalize 
     rgb_img = cv2.applyColorMap(final, cv2.COLORMAP_PLASMA)
 
-    final_render = cv2.imshow('composite', rgb_img)
+    final_render = cv2.imshow(winname, rgb_img)
     if cv2.waitKey(1) == ord('q'):
         break
 """
