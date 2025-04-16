@@ -58,7 +58,7 @@ while True:
     line_size = 10
 
     # Upscale the image using new  width and height
-    resize = 1
+    resize = 3
     up_width = 160 * resize
     up_height = 120 * resize
     up_points = (up_width, up_height)
