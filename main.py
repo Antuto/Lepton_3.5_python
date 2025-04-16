@@ -42,17 +42,21 @@ cv2.setWindowProperty(winname, cv2.WND_PROP_FULLSCREEN,
 while True:
     
     with Lepton3() as l:
-        a, _ = l.capture()
-    a = cv2.normalize(a, a, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
-    a = np.right_shift(a, 8, a)  # fit data into 8 bits
+        frame, _ = l.capture()
+    frame = cv2.normalize(frame, frame, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
+    frame = np.right_shift(frame, 8, frame)  # fit data into 8 bits
 
-    
+    # Récupération du pixel central
+    h, w = frame.shape
+    center_temp = frame[h // 2, w // 2]
+    text = f"Temp: {center_temp}"
+
     # Upscale the image using new  width and height
     resize = 5
     up_width = 160 * resize
     up_height = 120 * resize
     up_points = (up_width, up_height)
-    resized_up = cv2.resize(a, up_points, interpolation=cv2.INTER_LANCZOS4)
+    resized_up = cv2.resize(frame, up_points, interpolation=cv2.INTER_LANCZOS4)
     #Remove noise with blur then Sharpen it
     smoothed = cv2.GaussianBlur(resized_up, (3, 3), 10)
     image_sharp = cv2.filter2D(src=smoothed, ddepth=-1, kernel=kernel)
@@ -60,6 +64,8 @@ while True:
     final = np.uint8(image_sharp)
     #final = cv2.equalizeHist(final) #-> NEED TO TEST instead of normalize 
     rgb_img = cv2.applyColorMap(final, cv2.COLORMAP_PLASMA)
+
+    cv2.putText(rgb_img, text, (w // 2 - 50, h // 2), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
 
     final_render = cv2.imshow(winname, rgb_img)
     if cv2.waitKey(1) == ord('q'):
