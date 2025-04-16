@@ -9,6 +9,10 @@ kernel = np.array([[0, -1, 0],
 
 cv2.startWindowThread()
 
+dim_x = 800
+dim_y = 408
+center = (int(dim_x/2),int(dim_y/2))
+
 """# Configure camera and start
 picam2 = Picamera2()
 config = picam2.create_preview_configuration(raw={"size": (2592, 1944)}) #Max resolution : (3280, 2464)
@@ -30,6 +34,11 @@ def zoom_center(val,img):
     img_cropped = img[y1:y2,x1:x2]
     return cv2.resize(img_cropped, None, fx=val, fy=val)
 
+winname = "flir_windows"
+cv2.namedWindow(winname, cv2.WINDOW_NORMAL)
+cv2.moveWindow(winname, dim_x - 1, dim_y - 1)
+cv2.setWindowProperty(winname, cv2.WND_PROP_FULLSCREEN,
+                          cv2.WINDOW_FULLSCREEN)
 while True:
     
     with Lepton3() as l:
