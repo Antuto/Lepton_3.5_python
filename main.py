@@ -43,13 +43,15 @@ while True:
     
     with Lepton3() as l:
         frame, _ = l.capture()
+        h, w = frame.shape
+        center_temp = frame[h // 2, w // 2]
+        text = f"Temp: {center_temp}"
+
     frame = cv2.normalize(frame, frame, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
     frame = np.right_shift(frame, 8, frame)  # fit data into 8 bits
 
     # Récupération du pixel central
-    h, w = frame.shape
-    center_temp = frame[h // 2, w // 2]
-    text = f"Temp: {center_temp}"
+
 
     # Upscale the image using new  width and height
     resize = 5
