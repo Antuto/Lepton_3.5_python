@@ -35,10 +35,7 @@ def zoom_center(val,img):
     img_cropped = img[y1:y2,x1:x2]
     return cv2.resize(img_cropped, None, fx=val, fy=val)
 
-winname = "flir_windows"
-cv2.namedWindow(winname, cv2.WINDOW_NORMAL)
-cv2.moveWindow(winname, 100, 100)
-cv2.setWindowProperty(winname, cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
+
 
 def ktoc(val):
   return (val - 27315) / 100.0
@@ -56,6 +53,13 @@ while True:
 
     # Récupération du pixel central
     line_size = 10
+    border_size = 160
+    frame_shifted = cv2.copyMakeBorder(frame, 0, 0, 0, border_size, cv2.BORDER_CONSTANT, value=[0, 0, 0])
+
+    winname = "flir_windows"
+    cv2.namedWindow(winname, cv2.WINDOW_NORMAL)
+    cv2.moveWindow(winname, 100, 100)
+    cv2.setWindowProperty(winname, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     # Upscale the image using new  width and height
     resize = 4
