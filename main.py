@@ -40,13 +40,16 @@ cv2.namedWindow(winname, cv2.WINDOW_NORMAL)
 cv2.moveWindow(winname, dim_x - 1, dim_y - 1)
 cv2.setWindowProperty(winname, cv2.WND_PROP_FULLSCREEN,
                           cv2.WINDOW_FULLSCREEN)
+def ktoc(val):
+  return (val - 27315) / 100.0
+
 while True:
     
     with Lepton3() as l:
         frame, _ = l.capture()
         #h, w = frame.shape
         center_temp = frame[sensor_center]
-        text = f"Temp: {center_temp}"
+        text = f"Temp: {ktoc(center_temp)}"
 
     frame = cv2.normalize(frame, frame, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
     frame = np.right_shift(frame, 8, frame)  # fit data into 8 bits
