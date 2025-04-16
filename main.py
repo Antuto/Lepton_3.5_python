@@ -48,7 +48,7 @@ while True:
         """h, w, _ = frame.shape
         center_temp = frame[h//2, w//2]"""
         max_temp = np.max(frame)
-        hot_y, hot_x = np.unravel_index(np.argmax(frame), frame.shape)
+        hot_y, hot_x, _ = np.unravel_index(np.argmax(frame), frame.shape)
         text = f"Temp: {ktoc(max_temp)}"
 
     frame = cv2.normalize(frame, frame, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
@@ -77,10 +77,10 @@ while True:
     #final = cv2.equalizeHist(final) #-> NEED TO TEST instead of normalize 
     rgb_img = cv2.applyColorMap(final, cv2.COLORMAP_PLASMA)
     # Draw a diagonal blue line with thickness of 5 px
-    cv2.line(rgb_img, (center[0], center[1] - line_size), (center[0], center[1] + line_size), (255, 255, 255), 1)
-    cv2.line(rgb_img, (center[0] - line_size, center[1]), (center[0] + line_size, center[1]), (255, 255, 255), 1)
-    cv2.circle(rgb_img, center, 5, (255, 255, 255), 1)
-    cv2.putText(rgb_img, text, text_center, cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
+    cv2.line(rgb_img, (hot_x, hot_y - line_size), (hot_x, hot_y + line_size), (255, 255, 255), 1)
+    cv2.line(rgb_img, (hot_x - line_size, hot_y), (hot_x + line_size, hot_y), (255, 255, 255), 1)
+    cv2.circle(rgb_img, (hot_x, hot_y), 5, (255, 255, 255), 1)
+    cv2.putText(rgb_img, text, (hot_x+20, hot_y+20), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
 
     final_render = cv2.imshow(winname, rgb_img)
     if cv2.waitKey(1) == ord('q'):
