@@ -53,20 +53,18 @@ while True:
 
     # Récupération du pixel central
     line_size = 10
-    border_size = 160
-    frame_shifted = cv2.copyMakeBorder(frame, 0, 0, 0, border_size, cv2.BORDER_CONSTANT, value=[0, 0, 0])
 
     winname = "flir_windows"
     cv2.namedWindow(winname, cv2.WINDOW_NORMAL)
-    #cv2.moveWindow(winname, dim_x - 1, dim_y - 1)
+    cv2.moveWindow(winname, 0, 0)
     cv2.setWindowProperty(winname, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     # Upscale the image using new  width and height
     resize = 4
-    up_width = 160 * resize
+    up_width = 160 * 5
     up_height = 120 * resize
     up_points = (up_width, up_height)
-    resized_up = cv2.resize(frame_shifted, up_points, interpolation=cv2.INTER_LANCZOS4)
+    resized_up = cv2.resize(frame, up_points, interpolation=cv2.INTER_LANCZOS4)
     #Remove noise with blur then Sharpen it
     smoothed = cv2.GaussianBlur(resized_up, (3, 3), 10)
     image_sharp = cv2.filter2D(src=smoothed, ddepth=-1, kernel=kernel)
