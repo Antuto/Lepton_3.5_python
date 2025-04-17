@@ -49,6 +49,8 @@ while True:
         center_temp = frame[h//2, w//2]"""
         max_temp = np.max(frame)
         hot_y, hot_x, _ = np.unravel_index(np.argmax(frame), frame.shape)
+        hot_x *= 5
+        hot_y *= 4
         text = f"Temp: {ktoc(max_temp)}"
 
     frame = cv2.normalize(frame, frame, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
@@ -64,9 +66,9 @@ while True:
 
     frame = cv2.rotate(frame, cv2.ROTATE_180)
     # Upscale the image using new  width and height
-    resize = 4
+
     up_width = 160 * 5
-    up_height = 120 * resize
+    up_height = 120 * 4
     up_points = (up_width, up_height)
     resized_up = cv2.resize(frame, up_points, interpolation=cv2.INTER_LANCZOS4)
     #Remove noise with blur then Sharpen it
