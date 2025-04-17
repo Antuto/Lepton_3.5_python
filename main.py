@@ -41,19 +41,6 @@ def zoom_center(val,img):
     img_cropped = img[y1:y2,x1:x2]
     return cv2.resize(img_cropped, None, fx=val, fy=val)
 
-# Dimensions du bouton
-button_x1, button_y1 = 50, 20
-button_x2, button_y2 = 250, 60
-
-def on_mouse_click(event, x, y, flags, param):
-    if event == cv2.EVENT_LBUTTONDOWN:
-        if button_x1 < x < button_x2 and button_y1 < y < button_y2:
-            print("Bouton activé !")
-cv2.setMouseCallback(winname, on_mouse_click)
-
-image = np.zeros((100, 300), dtype=np.uint8)
-image[button_y1:button_y2, button_x1:button_x2] = 180
-cv2.putText(image, "Activer", (100, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255), 2)
 
 def ktoc(val):
   return (val - 27315) / 100.0
