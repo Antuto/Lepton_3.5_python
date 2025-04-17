@@ -49,8 +49,8 @@ while True:
         center_temp = frame[h//2, w//2]"""
         max_temp = np.max(frame)
         hot_y, hot_x, _ = np.unravel_index(np.argmax(frame), frame.shape)
-        hot_x *= 5
-        hot_y *= 4
+        hot_x = (160-hot_x)*5
+        hot_y = (120-hot_y)*4
         text = f"Temp: {ktoc(max_temp)}"
 
     frame = cv2.normalize(frame, frame, 0, 60535, cv2.NORM_MINMAX)  # extend contrast
