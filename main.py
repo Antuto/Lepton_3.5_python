@@ -15,6 +15,11 @@ center = (int(dim_x/2),int(dim_y/2))
 text_center = (int(dim_x/2)+20,int(dim_y/2)+20)
 sensor_center = (80,60)
 
+winname = "flir_windows"
+cv2.namedWindow(winname, cv2.WINDOW_NORMAL)
+cv2.moveWindow(winname, 0, 0)
+cv2.setWindowProperty(winname, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
 """# Configure camera and start
 picam2 = Picamera2()
 config = picam2.create_preview_configuration(raw={"size": (2592, 1944)}) #Max resolution : (3280, 2464)
@@ -36,9 +41,19 @@ def zoom_center(val,img):
     img_cropped = img[y1:y2,x1:x2]
     return cv2.resize(img_cropped, None, fx=val, fy=val)
 
-def on_button_click(*args):
-    print("Bouton activé !")
-cv2.createButton("Activer Feature", on_button_click, None, cv2.QT_PUSH_BUTTON, 1)
+# Dimensions du bouton
+button_x1, button_y1 = 50, 20
+button_x2, button_y2 = 250, 60
+
+def on_mouse_click(event, x, y, flags, param):
+    if event == cv2.EVENT_LBUTTONDOWN:
+        if button_x1 < x < button_x2 and button_y1 < y < button_y2:
+            print("Bouton activé !")
+cv2.setMouseCallback(winname, on_mouse_click)
+
+image = np.zeros((100, 300), dtype=np.uint8)
+image[button_y1:button_y2, button_x1:button_x2] = 180
+cv2.putText(image, "Activer", (100, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255), 2)
 
 def ktoc(val):
   return (val - 27315) / 100.0
@@ -68,10 +83,7 @@ while True:
     # Récupération du pixel central
     line_size = 10
 
-    winname = "flir_windows"
-    cv2.namedWindow(winname, cv2.WINDOW_NORMAL)
-    cv2.moveWindow(winname, 0, 0)
-    cv2.setWindowProperty(winname, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
 
     frame = cv2.rotate(frame, cv2.ROTATE_180)
     # Upscale the image using new  width and height
