@@ -53,7 +53,7 @@ while True:
         hot_y = (120-hot_y)*4
 
         min_temp = np.min(frame)
-        cold_y, cold_x, _ = np.unravel_index(np.argmax(frame), frame.shape)
+        cold_y, cold_x, _ = np.unravel_index(np.argmin(frame), frame.shape)
         cold_x = (160 - cold_x) * 5
         cold_y = (120 - cold_y) * 4
 
