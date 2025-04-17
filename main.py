@@ -54,8 +54,8 @@ while True:
 
         min_temp = np.min(frame)
         cold_y, cold_x, _ = np.unravel_index(np.argmax(frame), frame.shape)
-        cold_x = (160 - hot_x) * 5
-        cold_y = (120 - hot_y) * 4
+        cold_x = (160 - cold_x) * 5
+        cold_y = (120 - cold_y) * 4
 
         max_temp_text = f"Temp: {ktoc(max_temp)}"
         min_temp_text = f"Temp: {ktoc(min_temp)}"
