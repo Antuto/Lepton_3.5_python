@@ -90,8 +90,8 @@ while True:
     cv2.line(rgb_img, (hot_x - line_size, hot_y), (hot_x + line_size, hot_y), (255, 255, 255), 1)
     cv2.circle(rgb_img, (hot_x, hot_y), 5, (255, 255, 255), 1)
 
-    cv2.putText(rgb_img, max_temp_text, (hot_x+20, hot_y+20), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
-    cv2.putText(rgb_img, min_temp_text, (hot_x + 20, hot_y + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
+    cv2.putText(rgb_img, max_temp_text, (hot_x+20, hot_y+20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+    cv2.putText(rgb_img, min_temp_text, (cold_x + 20, cold_y + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
     final_render = cv2.imshow(winname, rgb_img)
     if cv2.waitKey(1) == ord('q'):
